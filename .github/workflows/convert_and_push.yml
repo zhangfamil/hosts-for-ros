@@ -22,8 +22,9 @@ jobs:
       - name: Run Script
         run: python convert_hosts.py  # 执行你的Python脚本
 
-      - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore: auto-update hosts.conf'
-          branch: main  # 提交到主分支
+     - name: Commit Changes
+  uses: stefanzweifel/git-auto-commit-action@v5
+  with:
+    commit_message: 'chore: auto-update hosts.conf'
+    branch: main
+    token: ${{ secrets.PAT }}  # 使用 PAT 替代默认的 GITHUB_TOKEN
