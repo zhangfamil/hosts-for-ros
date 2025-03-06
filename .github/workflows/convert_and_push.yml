@@ -20,7 +20,7 @@ jobs:
         run: pip install requests  # 安装脚本依赖的库
 
       - name: Run Script
-        run: python Update hosts.py  # 执行你的Python脚本
+        run: python convert_hosts.py  # 执行你的Python脚本
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
