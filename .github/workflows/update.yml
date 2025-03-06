@@ -1,0 +1,32 @@
+name: Auto Update Hosts
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天UTC 0点执行
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 确保拉取完整历史记录
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Conversion Script
+        run: python convert_adblock.py
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: auto-update hosts.conf'
+          branch: main
+          token: ${{ secrets.PAT }}  # 使用 PAT
