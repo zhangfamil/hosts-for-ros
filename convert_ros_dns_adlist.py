@@ -5,12 +5,12 @@ import os
 import requests
 
 
-def down_load_from_anti_ad():
-    # 从https://github.com/privacy-protection-tools/anti-AD 获取最新的广告过滤列表
-    # 我们可以从https://anti-ad.net/domains.txt这里下载
+def down_load_from_adaway():
+    # 从https://adaway.org/hosts.txt 获取最新的广告过滤列表
+    # 我们可以从https://adaway.org/hosts.txt这里下载
 
     # 设置要下载的文件的URL
-    url = 'https://anti-ad.net/domains.txt'
+    url = 'https://adaway.org/hosts.txt'
 
     # 发送HTTP请求获取文件内容
     response = requests.get(url)
@@ -28,13 +28,13 @@ def down_load_from_anti_ad():
 
 
 def convert():
-    # 检查当前目录是否有domains.txt
-    # if os.path.exists('domains.txt'):
-    if os.path.exists('/home/runner/work/anti-ad-for-ros/anti-ad-for-ros/code/anti-ad-domains.txt'):
+    # 检查当前目录是否有hosts.txt
+    # if os.path.exists('hosts.txt'):
+    if os.path.exists('/home/runner/work/anti-ad-for-ros/anti-ad-for-ros/code/anti-ad-hosts.txt'):
         # 执行转换
         # 打开文件进行读取
         # with open('domains.txt', 'r', encoding='utf-8') as file:
-        with open('/home/runner/work/anti-ad-for-ros/anti-ad-for-ros/code/anti-ad-domains.txt', 'r', encoding='utf-8') as file:
+        with open('/home/runner/work/anti-ad-for-ros/anti-ad-for-ros/code/anti-ad-hosts.txt', 'r', encoding='utf-8') as file:
             lines = file.readlines()
 
         # 打开文件进行写入，创建新文件anti-ad-for-ros.conf
@@ -53,7 +53,7 @@ def convert():
 
         print("文件转换完成。")
     else:
-        print('没有找到anti-ad-domains.txt，可能clone失败了')
+        print('没有找到anti-ad-hosts.txt，可能clone失败了')
 
 
 
