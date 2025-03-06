@@ -1,42 +1,29 @@
-name: Scheduled Update
-
+name: Auto Update Script
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天UTC时间0点运行
+    - cron: '0 0 * * *'  # 每天UTC时间0点执行（北京时间8点）
+  workflow_dispatch:  # 支持手动触发
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Checkout upstream repository
-        uses: actions/checkout@v4
-        with:
-          repository: privacy-protection-tools/anti-AD
-          ref: master  # 或者指定其他分支
-          path: code  # 指定克隆到的工作目录路径
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.x'
 
-      - name: Install dependencies
-        run: pip install requests
+      - name: Install Dependencies
+        run: pip install requests  # 安装脚本依赖的库
 
-      - name: Run conversion script
-        run: python ./convert_ros_dns_adlist.py
+      - name: Run Script
+        run: python convert_hosts.py  # 执行你的Python脚本
 
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add anti-ad-for-ros.conf
-          git commit -m "Scheduled update" || exit 0
-          git push
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        working-directory: '.'
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: auto-update hosts.conf'
+          branch: main  # 提交到主分支
