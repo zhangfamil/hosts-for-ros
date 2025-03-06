@@ -23,7 +23,7 @@ jobs:
         run: pip install requests
 
       - name: Run Conversion Script
-        run: python convert_adblock.py
+        run: python convert_hosts.py
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
