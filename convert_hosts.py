@@ -3,7 +3,7 @@ import re
 
 def download_and_convert_hosts():
     # 配置参数
-    url = "https://raw.githubusercontent.com/REIJI007/Adblock-Rule-Collection/main/ADBLOCK_RULE_COLLECTION.txt"
+    url = "https://raw.githubusercontent.com/REIJI007/Adblock-Rule-Collection/refs/heads/main/ADBLOCK_RULE_COLLECTION_HOST.txt"
     output_file = "hosts.conf"
     
     try:
