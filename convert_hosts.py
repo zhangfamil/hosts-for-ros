@@ -63,6 +63,10 @@ def main():
         {
             "url": "https://adaway.org/hosts.txt",
             "type": "hosts"
+        },
+         {
+            "url": "https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/anti-ad-domains.txt",
+            "type": "hosts"
         }
     ]
 
