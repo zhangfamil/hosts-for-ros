@@ -26,6 +26,8 @@ def extract_domains(content: str, source_type: str) -> Set[str]:
         if not line or line.startswith(("#", "!", "@")):  # 跳过注释行
             continue
 
+        domain = None  # 初始化变量
+
         # 根据来源类型选择解析逻辑
         if source_type == "adblock":
             match = adblock_pattern.match(line)
@@ -36,7 +38,7 @@ def extract_domains(content: str, source_type: str) -> Set[str]:
             if match:
                 domain = match.group(1).lower()
         else:
-            continue
+            continue  # 如果 source_type 未知，跳过
 
         # 验证域名格式
         if domain and domain_pattern.match(domain):
